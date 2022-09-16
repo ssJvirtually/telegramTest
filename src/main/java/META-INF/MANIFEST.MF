@@ -1,0 +1,43 @@
+Manifest-Version: 1.0
+Main-Class: org.shashi.tele.TeleGramTest
+Class-Path: opentelemetry-sdk-metrics-1.16.0.jar httpmime-4.5.13.jar asy
+ nc-http-client-2.12.3.jar jersey-common-2.35.jar jcommander-1.82.jar co
+ mmons-codec-1.11.jar netty-common-4.1.78.Final.jar grizzly-http-2.4.4.j
+ ar netty-handler-4.1.78.Final.jar netty-codec-4.1.78.Final.jar selenium
+ -chromium-driver-4.4.0.jar jsr305-3.0.2.jar failsafe-3.2.4.jar netty-tr
+ ansport-native-kqueue-4.1.60.Final-osx-x86_64.jar jakarta.inject-2.6.1.
+ jar failureaccess-1.0.1.jar jersey-client-2.35.jar jackson-core-2.13.2.
+ jar telegrambots-meta-6.1.0.jar osgi-resource-locator-1.0.3.jar jakarta
+ .annotation-api-1.3.5.jar byte-buddy-1.12.10.jar netty-transport-native
+ -epoll-4.1.78.Final.jar netty-codec-socks-4.1.60.Final.jar error_prone_
+ annotations-2.11.0.jar netty-transport-classes-kqueue-4.1.78.Final.jar 
+ jakarta.validation-api-2.0.2.jar selenium-support-4.4.0.jar hk2-api-2.6
+ .1.jar jackson-annotations-2.13.2.jar jackson-module-jaxb-annotations-2
+ .13.2.jar jackson-jaxrs-json-provider-2.13.2.jar netty-codec-http-4.1.7
+ 8.Final.jar reactive-streams-1.0.3.jar hk2-utils-2.6.1.jar jtoml-2.0.0.
+ jar netty-transport-native-epoll-4.1.60.Final-linux-x86_64.jar grizzly-
+ http-server-2.4.4.jar netty-transport-classes-epoll-4.1.78.Final.jar hk
+ 2-locator-2.6.1.jar opentelemetry-sdk-extension-autoconfigure-spi-1.16.
+ 0.jar auto-service-1.0.1.jar selenium-json-4.4.0.jar commons-io-2.11.0.
+ jar selenium-chrome-driver-4.4.0.jar netty-transport-native-unix-common
+ -4.1.78.Final.jar opentelemetry-sdk-logs-1.16.0-alpha.jar checker-qual-
+ 3.12.0.jar netty-handler-proxy-4.1.60.Final.jar javassist-3.25.0-GA.jar
+  listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar jakarta
+ .xml.bind-api-2.3.3.jar auto-service-annotations-1.0.1.jar opentelemetr
+ y-sdk-1.16.0.jar commons-logging-1.2.jar jersey-server-2.35.jar aopalli
+ ance-repackaged-2.6.1.jar opentelemetry-semconv-1.16.0-alpha.jar json-2
+ 0220320.jar jackson-jaxrs-base-2.13.2.jar selenium-api-4.4.0.jar grizzl
+ y-framework-2.4.4.jar jakarta.ws.rs-api-2.1.6.jar opentelemetry-api-1.1
+ 6.0.jar httpcore-4.4.13.jar opentelemetry-sdk-common-1.16.0.jar slf4j-a
+ pi-1.7.36.jar netty-resolver-4.1.78.Final.jar netty-reactive-streams-2.
+ 0.4.jar telegrambots-6.1.0.jar jersey-hk2-2.35.jar jersey-container-gri
+ zzly2-http-2.35.jar selenium-http-4.4.0.jar httpclient-4.5.13.jar opent
+ elemetry-context-1.16.0.jar guava-31.1-jre.jar opentelemetry-sdk-extens
+ ion-autoconfigure-1.16.0-alpha.jar netty-buffer-4.1.78.Final.jar opente
+ lemetry-sdk-trace-1.16.0.jar async-http-client-netty-utils-2.12.3.jar o
+ pentelemetry-exporter-logging-1.16.0.jar jakarta.activation-1.2.2.jar j
+ 2objc-annotations-1.3.jar selenium-remote-driver-4.4.0.jar jackson-data
+ bind-2.13.2.2.jar jersey-media-json-jackson-2.35.jar jersey-entity-filt
+ ering-2.35.jar netty-transport-native-kqueue-4.1.78.Final.jar commons-e
+ xec-1.3.jar netty-transport-4.1.78.Final.jar auto-common-1.2.jar
+
