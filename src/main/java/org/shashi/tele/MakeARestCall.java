@@ -33,48 +33,49 @@ public class MakeARestCall {
 //        Response response = client.newCall(request).execute();
 //    }
 
-    public static File getVideoFile(String videoLink){
-        try (BufferedInputStream in = new BufferedInputStream(new URL(videoLink).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream("reel.mp4")) {
-            byte dataBuffer[] = new byte[1024];
+    public static File getVideoFile(String videoLink) {
+        try (
+         BufferedInputStream in = new BufferedInputStream(new URL(videoLink).openStream());
+         FileOutputStream fileOutputStream = new FileOutputStream("reel.mp4"))
+        {
+            byte[] dataBuffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
             }
+            System.out.println("getVIdeoFIle is being pring");
             return new File("reel.mp4");
-        } catch (IOException e) {
+        }
+
+        catch (IOException e) {
             // handle exception
         }
         return null;
     }
 
 
-    public static void downloadUsingStream(String urlStr, String file) throws IOException{
+    public static void downloadUsingStream(String urlStr, String file) throws IOException {
         URL url = new URL(urlStr);
 
         BufferedInputStream bis = new BufferedInputStream(url.openStream());
         FileOutputStream fis = new FileOutputStream(file);
         byte[] buffer = new byte[1024];
-        int count=0;
-        while((count = bis.read(buffer,0,1024)) != -1)
-        {
+        int count = 0;
+        while ((count = bis.read(buffer, 0, 1024)) != -1) {
             fis.write(buffer, 0, count);
         }
         fis.close();
         bis.close();
-
-
     }
 
-    public static InputStream downloadUsingInputStream(String urlStr, String file) throws IOException{
+    public static InputStream downloadUsingInputStream(String urlStr, String file) throws IOException {
         URL url = new URL(urlStr);
 
         InputStream bis = new BufferedInputStream(url.openStream());
         FileOutputStream fis = new FileOutputStream(file);
         byte[] buffer = new byte[1024];
-        int count=0;
-        while((count = bis.read(buffer,0,1024)) != -1)
-        {
+        int count = 0;
+        while ((count = bis.read(buffer, 0, 1024)) != -1) {
             fis.write(buffer, 0, count);
         }
         fis.close();

@@ -43,13 +43,7 @@ public class Bot extends TelegramLongPollingBot {
                 InputFile file = new InputFile();
                 File inputFile = MakeARestCall.getVideoFile(videoLink);
 
-                try {
-                    MakeARestCall.downloadUsingNIO(videoLink,"reelssssss");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                //File inputFile = new File("C:\\Users\\HP\\Downloads\\java\\SeleniumTest\\reel.mp4");
-
+                //File inputFile = new File("reel.mp4");
                 file.setMedia(inputFile);
 
                 SendVideo sendVideo = new SendVideo();
