@@ -1,8 +1,6 @@
 package org.shashi.tele;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
-import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -11,6 +9,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class Bot extends TelegramLongPollingBot {
 
@@ -21,20 +21,34 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
-
+        //update.getMessage().
 
         System.out.println(message);
 
 
-        if(isURL(message)){
+        if(isURL(message) || message.contains("https")){
 
+
+            message = removeCharBeforeUrl(message);
+            System.out.println(message);
             //GetReel getReel = new GetReel();
             String videoLink = null;
             try {
-                videoLink =   HttpClientSynchronous.getVideoLink(message);
+                if(getDomainName(message).contains("pin")){
+
+                    videoLink = HttpClientSynchronous.getPintrestVideoLink(message);
+                }
+                if(getDomainName(message).contains("instagram")) {
+                    videoLink = HttpClientSynchronous.getInstaVideoLink(message);
+                }
+                if(getDomainName(message).contains("youtube")){
+                    videoLink = HttpClientSynchronous.getYTVideoLink(message);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
 
@@ -50,6 +64,7 @@ public class Bot extends TelegramLongPollingBot {
 
                 sendVideo.setChatId(update.getMessage().getChatId());
                 sendVideo.setVideo(file);
+                sendVideo.setReplyToMessageId(update.getMessage().getMessageId());
 
                 try {
                     execute(sendVideo);
@@ -69,6 +84,16 @@ public class Bot extends TelegramLongPollingBot {
                 }
             }
 
+        }else{
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.enableMarkdown(true);
+            sendMessage.setChatId(update.getMessage().getChatId());
+            sendMessage.setText("Not a Valid URL , cant get anything out of it");
+            try {
+                execute(sendMessage);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -129,12 +154,48 @@ public class Bot extends TelegramLongPollingBot {
         return "5065568360:AAHGbdI88zjlpBJgSQWxd-MeLscVxNpAF3c";
     }
 
+
+    /**
+     * This method returns true if the given url is a valid url
+     * @param url
+     * @return
+     */
     public boolean isURL(String url) {
         try {
             (new java.net.URL(url)).openStream().close();
             return true;
         } catch (Exception ex) { }
         return false;
+    }
+
+
+    /**
+     * This method returns the domain of the link
+     * @param url
+     * @return
+     * @throws URISyntaxException
+     */
+    public static String getDomainName(String url) throws URISyntaxException {
+//        java.net.URL aURL;
+//        try {
+//            aURL = new java.net.URL(url);
+//            System.out.println("host = " + aURL.getHost()); //example.com
+//
+//        } catch (MalformedURLException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        return "";
+
+        URI uri = new URI(url);
+        String domain = uri.getHost();
+        return domain.startsWith("www.") ? domain.substring(4) : domain;
+    }
+
+
+    public static String removeCharBeforeUrl(String link){
+        return link.replaceAll("[\r\n]+", " ")
+                .replaceAll(".*(?=https://)", "");
     }
 
 }

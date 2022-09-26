@@ -1,5 +1,7 @@
 package org.shashi.tele;
 
+import com.google.common.net.MediaType;
+import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -17,8 +19,10 @@ public class HttpClientSynchronous {
             .version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(10))
             .build();
+    private static final OkHttpClient client = new OkHttpClient().newBuilder()
+            .build();
 
-    public static String getVideoLink(String videoLink) throws IOException, InterruptedException {
+    public static String getInstaVideoLink(String videoLink) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -52,8 +56,49 @@ public class HttpClientSynchronous {
         System.out.println(videoLink);
 
 
-       return instaVideoLink;
+        return instaVideoLink;
 
     }
+
+    public static String getPintrestVideoLink(String videoLink) throws IOException {
+
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("url", videoLink)
+                .build();
+        Request request = new Request.Builder()
+                .url("https://givefastlink.com/wp-json/aio-dl/video-data/")
+                .method("POST", body)
+                //.addHeader("Cookie", "PHPSESSID=9a20a4458987b49358eea573d6b8dcda")
+                .build();
+        Response response = client.newCall(request).execute();
+
+        JSONObject responseJson = new JSONObject(response.body().string());
+        JSONObject media = (JSONObject) responseJson.getJSONArray("medias").get(0);
+        String pintrestVideoLink = (String) media.get("url");
+
+        return pintrestVideoLink;
+    }
+
+    public static String getYTVideoLink(String videoLink) throws IOException {
+
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("url", videoLink)
+                .build();
+        Request request = new Request.Builder()
+                .url("https://givefastlink.com/wp-json/aio-dl/video-data/")
+                .method("POST", body)
+                .build();
+        Response response = client.newCall(request).execute();
+
+        JSONObject responseJson = new JSONObject(response.body().string());
+        JSONObject media = (JSONObject) responseJson.getJSONArray("medias").get(0);
+        String youtubeShortVideoLink = (String) media.get("url");
+
+        return youtubeShortVideoLink;
+    }
+
+
 
 }

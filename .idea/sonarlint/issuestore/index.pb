@@ -1,0 +1,3 @@
+
+R
+"src/main/java/META-INF/MANIFEST.MF,6\3\63ef5783cbf71fdf39c1fd6ae6873fd812259930
