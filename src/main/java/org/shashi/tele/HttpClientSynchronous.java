@@ -27,8 +27,9 @@ public class HttpClientSynchronous {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("https://api.instavideosave.com/allinone"))
-                .setHeader("User-Agent", "Java 11 HttpClient Bot") // add request header
+                .setHeader("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Mobile Safari/537.36") // add request header
                 .setHeader("url", videoLink)
+                .setHeader("referer","https://instavideosave.net")
                 .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -41,7 +42,7 @@ public class HttpClientSynchronous {
         //System.out.println(response.statusCode());
 
         // print response body
-        //System.out.println(response.body());
+        System.out.println(response.body());
 
         JSONObject jsonObject = new JSONObject(response.body());
 
